@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Document</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+    
+
+</head>
+<body>
+    
+    <div id="app">
+        <v-app> 
+            <v-app-bar app>
+                
+                <v-btn icon>
+                    <v-icon>mdi-chevron-left</v-icon>
+                </v-btn >
+                <v-toolbar-title >My App</v-toolbar-title>
+                <v-spacer></v-spacer>
+                <v-btn icon>
+                    <v-icon>mdi-magnify</v-icon>
+                </v-btn >
+                <v-btn icon @click.stop="drawer = !drawer">
+                    <v-icon>mdi-account-outline</v-icon>
+                </v-btn>
+            </v-app-bar>
+
+            <v-navigation-drawer
+            v-model="drawer"
+            absolute
+            right
+            temporary
+            >
+                <v-list nav dense>
+
+                    <v-list-item-group 
+                    v-model="group"
+                    active-class="deep-purple--text ">
+                    <v-list-item>
+                        <v-list-item-title>Menu1</v-list-item-title>
+                    </v-list-item>
+
+                    <v-list-item>
+                        <v-list-item-title>Menu2</v-list-item-title>
+                    </v-list-item>
+
+                    <v-list-item>
+                        <v-list-item-title>Menu3</v-list-item-title>
+                    </v-list-item>
+                </v-list-item-group>
+
+                </v-list>
+            </v-navigation-drawer>
+
+            <v-main>
+                <v-container>
+                hello world
+                hello world
+                </v-container>
+
+                <v-bottom-navigation v-model="value">
+                    <v-btn value="recent">
+                        <span>Recent</span>
+                        <v-icon>mdi-history</v-icon>
+                    </v-btn>
+
+                    <v-btn value="favorites">
+                        <span>Favorites</span>
+                        <v-icon>mdi-heart</v-icon>
+                    </v-btn>
+
+                    <v-btn value="nearby">
+                        <span>Nearby</span>
+                        <v-icon>mdi-map-marker</v-icon>
+                    </v-btn>
+                </v-bottom-navigation>
+            </v-main>
+        </v-app>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+
+    <script>
+        new Vue({
+            el : "#app",
+            vuetify : new Vuetify(),
+            data : {
+                drawer : false,
+                value : "recent",
+            },
+            methods : {
+                group() {
+                    this.drawer = false
+                },
+            },
+        })
+    </script>
+</body>
+</html>

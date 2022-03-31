@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+    </head>
+    <body>
+    <div id="app">
+        <v-app>
+            <v-app-bar app color="primary" dark> 
+                <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
+                <v-toolbar-title>부산 관광 안내</v-toolbar-title>
+            </v-app-bar>
+
+
+
+        <v-main>            
+            <v-navigation-drawer
+            v-model="drawer"
+            absolute
+            left
+            primary
+            >
+                <v-list-item class="mt-50"> 
+                    <v-list-item-avatar>
+                        <v-icon>mdi-account-circle</v-icon>
+                    </v-list-item-avatar>
+                    <v-list-item-content>
+                        <v-list-item-title>즐거운 부산</v-list-item-title>
+                        <v-list-item-subtitle>다이나믹 부산</v-list-item-subtitle>
+                    </v-list-item-content>
+
+                </v-list-item>
+                <v-divider></v-divider>
+                <v-list>
+                    <v-list-item
+                    v-for="item in items"
+                    :key="item.title"
+                    link
+                    >
+                        <v-list-item-icon>
+                            <v-icon>{{ item.icon }}</v-icon>
+                        </v-list-item-icon>
+
+                        <v-list-item-content>
+                            <v-list-item-title>{{ item.title }}</v-list-item-title>
+                        </v-list-item-content>
+                    </v-list-item>
+                </v-list>
+            </v-navigation-drawer>
+            <v-container>
+                <h1 class=" text-center mt-5 ">현재 인기있는 곳입니다.</h1>
+                <p class="text-center pa-2">추천을 통해 인기있는 곳을 골라주세요.</p>
+
+                <v-row>
+                    <v-col cols="12" sm="6"
+                    v-for="( site, index ) in sites"
+                    :key="site.title"
+                    >
+                        <v-card
+                        transition=""
+                        >
+                            <v-img :src="site.src" aspect-ratio="2.3"></v-img>
+
+                            <v-card-text>
+                                <h2>{{ site.title }}</h2>
+                            </v-card-text>
+
+                            <v-card-actions>
+                                <h3>{{ site.count }}</h3>
+                                <v-spacer></v-spacer>
+                                <v-btn 
+                                color="green white--text"
+                                @click="recommend(index)"
+                                >추천</v-btn>
+                            </v-card-actions>
+                        </v-card>
+                    </v-col>
+                </v-row>
+
+                <v-list>
+                    <v-list-item 
+                    v-for="item in recommendations"
+                    :key="item.title">
+                        <v-card class="mt-5">
+                            <v-card-text>{{ item.title }} 추천합니다.</v-card-text>
+                        </v-card>
+                    </v-list-item>
+                </v-list>
+
+
+            </v-container>
+        </v-main>
+        </v-app>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+    <script>
+        new Vue({
+        el: '#app',
+        vuetify: new Vuetify(),
+        data : {
+            drawer : false,
+            title : "",
+            count : 0,
+            sites : [
+                { count : 0, title : '해운대', src : 'https://cdn.pixabay.com/photo/2013/01/17/02/17/busan-75137__480.jpg'},
+                { count : 0, title : '바다 도시 야경', src : 'https://cdn.pixabay.com/photo/2017/06/07/12/24/building-2380214__340.jpg'},
+                { count : 0, title : '광안대교', src : 'https://cdn.pixabay.com/photo/2016/10/17/07/53/busan-night-scene-1747130__480.jpg'},
+                { count : 0, title : '해운대 인어동상', src : 'https://cdn.pixabay.com/photo/2018/11/26/08/21/mermaid-3838966__340.jpg'}
+            ],
+            items : [
+                { title : '메인페이지', icon : 'mdi-card-bulleted-outline', },
+                { title : '관광지소개', icon : 'mdi-clipboard-outline', },
+                { title : '추천 명소', icon : 'mdi-check', }
+            ],
+            recommendations : []
+        },
+        methods : {
+            recommend(index) {
+                this.recommendations.push(
+                    { count : this.count, 
+                        title : this.title }
+                );
+                this.sites[index].count++;
+                
+            }
+        }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+
+    <style>
+        .border_style{
+            border : black solid 1px;
+            background-color: cadetblue;
+        }
+    </style>
+
+</head>
+
+
+<body>
+    <div id="app">
+    <v-app>
+        <v-main>
+            <v-container>
+                <!-- v-row 를 이용하면 하나의 행을 만들수 있다 -->
+                <v-row>
+                    <!-- v-col 을 이용하여 행 안에 들어가는 열을 만들 수 았다 -->
+                    <v-col cols="12" class="border_style">그리드 12</v-col>
+                    <!-- cols : 차지하는 열의 갯수 -->
+                    <v-col cols="6" class="border_style">그리드 6</v-col>
+
+                    <v-col cols="1"></v-col>
+                </v-row>
+            </v-container>
+        </v-main>
+        </v-app>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+    <script>
+        new Vue({
+        el: '#app',
+        vuetify: new Vuetify(),
+        })
+    </script>
+</body>
+</html>
