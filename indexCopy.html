@@ -63,9 +63,10 @@
 
             <!-- 본문 내용 -->
             <v-container>
-                <h1 class=" text-center mt-5 ">현재 인기있는 곳입니다.</h1>
+                <h1 class="d-flex justify-center ">현재 인기있는 곳입니다.</h1>
                 <p class="text-center pa-2">추천을 통해 인기있는 곳을 골라주세요.</p>
 
+                <!-- 그리드를 이용해서 화면 출력 -->
                 <v-row>
                     <v-col cols="12" sm="6"
                     v-for="( site, index ) in sites"
@@ -91,27 +92,16 @@
                         </v-card>
                     </v-col>
                 </v-row>
-
-                
-
-            <!-- 추천합니다 텍스트 -->
             </v-container>
-                <v-slide-x-transition group>
-                        
-                    <v-list-item 
-                    v-for="item in recommendations"
-                    :key="item.title">
-                        <v-card-text>{{ item.title }} 추천합니다.</v-card-text>
-                    </v-list-item>
-                        
-                </v-slide-x-transition>
-            <v-container>
-                
-            </v-container>
+
+            <!-- 뷰티파이 카드디자인 위에 리스트 추가 :prop속성의 rec= "인스턴스 data의 rec"-->
+            <recommend-list :recommendations="recommendations"></recommend-list>
+
         </v-main>
         </v-app>
     </div>
 
+    <script src="./recommend-list.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
     <script>
@@ -137,12 +127,13 @@
         },
         methods : {
             recommend(index) {
+                this.sites[index].count++;
+                this.title=this.sites[index].title
+                
                 this.recommendations.push(
                     { count : this.sites[index].count, 
                         title : this.sites[index].title }
                 );
-                this.sites[index].count++;
-                
             }
         }
         })
